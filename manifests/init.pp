@@ -27,11 +27,11 @@ class ssh {
   }
 
   file { $ssh_config:
-    ensure    => file,
-    owner     => root,
-    group     => 0,
-    mode      => '0644',
-    require   => $::kernel ? {
+    ensure  => file,
+    owner   => root,
+    group   => 0,
+    mode    => '0644',
+    require => $::kernel ? {
       'Darwin'  => undef,
       'freebsd' => undef,
       'openbsd' => undef,

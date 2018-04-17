@@ -54,6 +54,12 @@ class ssh::params {
           $ssh_service     = 'network/ssh'
           $syslog_facility = 'AUTH'
         }
+        default: {
+          $client_package  = 'service/network/ssh'
+          $server_package  = 'service/network/ssh'
+          $ssh_service     = 'network/ssh'
+          $syslog_facility = 'AUTH'
+        }
       }
 
       $print_motd = false
