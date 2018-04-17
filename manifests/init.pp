@@ -31,14 +31,7 @@ class ssh {
     owner   => root,
     group   => 0,
     mode    => '0644',
-    require => $::kernel ? {
-      'Darwin'  => undef,
-      'freebsd' => undef,
-      'openbsd' => undef,
-      'solaris' => undef,
-      'SunOS'   => undef,
-      default   => Package[$client_package],
-    }
+    require => $::ssh::params::ssh_config_req,
   }
 
   # Disable UseRoaming - per bugs CVE-2016-0777 and CVE-2016-0778

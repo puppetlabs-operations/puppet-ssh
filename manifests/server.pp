@@ -23,10 +23,7 @@ class ssh::server (
 
   concat { $ssh::params::sshd_config:
     mode    => '0640',
-    require => $ssh::params::kernel ? {
-      'Linux' => Package[$ssh::params::server_package],
-      default => undef,
-    },
+    require => $ssh::params::server_package,
     notify  => Service['sshd'],
   }
   concat::fragment { 'sshd_config-header':
@@ -40,10 +37,7 @@ class ssh::server (
     name       => $ssh::params::ssh_service,
     enable     => true,
     hasstatus  => true,
-    hasrestart => $ssh::params::kernel ? {
-      'Darwin' => false,
-      default  => true,
-    },
+    hasrestart => $ssh::params::hasrestart,
   }
 
   file { $ssh::params::ssh_dir:
